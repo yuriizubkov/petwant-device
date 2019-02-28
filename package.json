@@ -1,13 +1,10 @@
 {
   "name": "petwant-device",
   "version": "1.0.0",
-  "description": "",
+  "description": "Abstraction layer of an UART-based communication protocol for more convenient data exchange with the controller chip of the Petwant PF-103 pet feeder.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "author": "Yurii Zubkov",
+  "license": "GNU GPLv3",
   "dependencies": {
     "rpi-gpio": "^2.1.3",
     "serialport": "^7.1.4"
