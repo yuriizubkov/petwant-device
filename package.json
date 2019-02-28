@@ -1,0 +1,15 @@
+{
+  "name": "petwant-device",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rpi-gpio": "^2.1.3",
+    "serialport": "^7.1.4"
+  }
+}
