@@ -45,6 +45,8 @@ async function setup() {
       console.info('Unknown Message received:', data)
     )
 
+    petwant.on('warningnofood', () => console.info('No food!'))
+
     console.info('Setup complete')
   } catch (err) {
     console.error(err)
@@ -69,7 +71,7 @@ async function cleanup(sig) {
   process.exit(0)
 }
 
-[
+;[
   'SIGHUP',
   'SIGINT',
   'SIGQUIT',

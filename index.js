@@ -272,7 +272,7 @@ class PetwantDevice extends EventEmitter {
       0,
       10
     )
-    return this.setScheduleEntry(scheduleEntry)
+    return this._setScheduleEntry(scheduleEntry)
   }
 
   getSchedule() {
