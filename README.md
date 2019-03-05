@@ -3,6 +3,8 @@ NPM module for Node.js. Abstraction layer of an UART-based communication protoco
 
 This is the result of reverse engineering of the communication protocol between the *ZEN3309A* microcontroller chip and original "control board" (OEM IP Camera with cloud functions) of the Petwant PF-103. You can use it in your own project.
 
+Please read [Wiki](https://github.com/yuriizubkov/petwant-device/wiki)
+
 ## Installation
 ``` npm install petwant-device ```
 
@@ -22,7 +24,7 @@ const petwantDevice = new PetwantDevice(
   10 // maxTimeDriftSeconds, max time drift before sync (in seconds) between Rpi clock and device clock
 )
 ```
-If you will be using Raspberry Pi Zero W board as a server and connect everything according to the scheme from the wiki (comming soon), you can omit the optional parameters:
+If you will be using Raspberry Pi Zero W board as a server and connect everything according to the scheme from the [Wiki](https://github.com/yuriizubkov/petwant-device/wiki/Wiring-diagram), you can omit the optional parameters:
 ``` javascript
 const PetwantDevice = require('petwant-device')
 const petwantDevice = new PetwantDevice()
@@ -80,7 +82,7 @@ petwantDevice.linkLedBlinking = true // true/false
 ### Set button
 Petwant PF-103 has 1 button on the front panel with text "Set" on it. It is a momentary pushbutton switch, something like that: https://www.sparkfun.com/products/9190
 
-One part of the button is connected to the microcontroller directly on PCB, the other part was connected to an OEM IP Camera (or the "control board" if you wish), which we replaced with the Rpi Zero W board (more explanation coming soon on wiki). 
+One part of the button is connected to the microcontroller directly on PCB, the other part was connected to an OEM IP Camera (or the "control board" if you wish), which we replaced with the Rpi Zero W board, read more on [Wiki](https://github.com/yuriizubkov/petwant-device/wiki/Motivation). 
 
 Therefore, with a short press on the button, the microcontroller gives you one portion of feed (even if the control board is not connected to the microcontroller, this behavior is programmed in the microcontroller`s firmware). But if you hold down the button for more than 3 seconds - nothing happens. This was probably done to be able to reset the settings in the original control board.
 
