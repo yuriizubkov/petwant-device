@@ -50,7 +50,9 @@ class PetwantDevice extends EventEmitter {
 
   set powerLedBlinking(value) {
     if (typeof value !== 'boolean')
-      throw new InvalidParameterException("Parameter 'value' is incorrect, it must be type of a Boolean")
+      throw new InvalidParameterException(
+        "Parameter 'value' is incorrect, it must be type of a Boolean"
+      )
 
     this._powerLedBlinking = value
 
@@ -75,7 +77,9 @@ class PetwantDevice extends EventEmitter {
 
   set linkLedBlinking(value) {
     if (typeof value !== 'boolean')
-      throw new InvalidParameterException("Parameter 'value' is incorrect, it must be type of a Boolean")
+      throw new InvalidParameterException(
+        "Parameter 'value' is incorrect, it must be type of a Boolean"
+      )
 
     this._linkLedBlinking = value
 
@@ -152,11 +156,11 @@ class PetwantDevice extends EventEmitter {
 
   _sendMessageToDevice(message) {
     if (
-      message !== undefined && 
+      message !== undefined &&
       (message instanceof Buffer ||
-      message instanceof Message.Types.MessagePingResponse ||
-      message instanceof Message.Types.MessageDateTime ||
-      message instanceof Message.Types.MessageScheduleEntry)
+        message instanceof Message.Types.MessagePingResponse ||
+        message instanceof Message.Types.MessageDateTime ||
+        message instanceof Message.Types.MessageScheduleEntry)
     ) {
       let bytes = null
       if (message instanceof Buffer) {
@@ -290,15 +294,17 @@ class PetwantDevice extends EventEmitter {
               portions: entry.portions,
               entryIndex: entry.entryIndex,
               soundIndex: entry.soundIndex,
-              enabled: entry.entryState === Message.Types.MessageScheduleEntry.EntryStates.ENABLED
+              enabled:
+                entry.entryState ===
+                Message.Types.MessageScheduleEntry.EntryStates.ENABLED
             })
             if (schedule.length === 4) {
               this.removeListener('scheduleentry', scheduleEntryListener)
               resolve(schedule)
             }
-          }
+          }.bind(this)
 
-          this.on('scheduleentry', scheduleEntryListener.bind(this))
+          this.on('scheduleentry', scheduleEntryListener)
         })
         .catch(err => reject(err))
     })
@@ -335,7 +341,7 @@ class PetwantDevice extends EventEmitter {
     portions,
     entryIndex,
     soundIndex = 10, // no sound
-    enabled = true,
+    enabled = true
   ) {
     if (!this._uartConnected)
       return Promise.reject(new UARTNotConnectedException())
@@ -344,7 +350,7 @@ class PetwantDevice extends EventEmitter {
       ? Message.Types.MessageScheduleEntry.EntryStates.ENABLED
       : Message.Types.MessageScheduleEntry.EntryStates.DISABLED
 
-    let scheduleEntry = null;
+    let scheduleEntry = null
     try {
       scheduleEntry = new Message.Types.MessageScheduleEntry(
         hours,
@@ -395,8 +401,12 @@ class PetwantDevice extends EventEmitter {
 
   setPowerLedState(state) {
     if (typeof state !== 'boolean')
-      return Promise.reject(new InvalidParameterException("Parameter 'state' is incorrect, it must be type of a Boolean"))
-    
+      return Promise.reject(
+        new InvalidParameterException(
+          "Parameter 'state' is incorrect, it must be type of a Boolean"
+        )
+      )
+
     if (!this._gpioSetupCompleted)
       return Promise.reject(new GPIOSetupNotCompletedException())
 
@@ -412,7 +422,11 @@ class PetwantDevice extends EventEmitter {
 
   setLinkLedState(state) {
     if (typeof state !== 'boolean')
-      return Promise.reject(new InvalidParameterException("Parameter 'state' is incorrect, it must be type of a Boolean"))
+      return Promise.reject(
+        new InvalidParameterException(
+          "Parameter 'state' is incorrect, it must be type of a Boolean"
+        )
+      )
 
     if (!this._gpioSetupCompleted)
       return Promise.reject(new GPIOSetupNotCompletedException())
